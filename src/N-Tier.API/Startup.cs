@@ -1,4 +1,4 @@
-using FluentValidation.AspNetCore;
+﻿using FluentValidation.AspNetCore;
 using N_Tier.API.Filters;
 using N_Tier.API.Middleware;
 using N_Tier.Application;

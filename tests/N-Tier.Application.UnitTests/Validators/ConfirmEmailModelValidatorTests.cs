@@ -2,6 +2,7 @@
 using FluentValidation.TestHelper;
 using N_Tier.Application.Models.User;
 using N_Tier.Application.Models.Validators.User;
+using System;
 using Xunit;
 
 namespace N_Tier.Application.UnitTests.Validators;
@@ -32,7 +33,7 @@ public class ConfirmEmailModelValidatorTests
     public void Validator_Should_Have_Error_When_UserId_Is_Empty()
     {
         // Arrange
-        var confirmEmailModel = new ConfirmEmailModel { UserId = string.Empty };
+        var confirmEmailModel = new ConfirmEmailModel { UserId = Guid.Empty };
 
         // Act
         var result = _sut.TestValidate(confirmEmailModel);

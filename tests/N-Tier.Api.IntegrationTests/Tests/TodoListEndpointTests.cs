@@ -213,7 +213,7 @@ public class TodoListEndpointTests : BaseOneTimeSetup
 
         var todoListsNotBelongToTheUser = Builder<TodoList>.CreateListOfSize(10).All()
             .With(tl => tl.Id = Guid.NewGuid())
-            .With(tl => tl.CreatedBy = Guid.NewGuid().ToString())
+            .With(tl => tl.CreatedBy = Guid.NewGuid())
             .Build();
 
         await context.TodoLists.AddRangeAsync(todoLists);

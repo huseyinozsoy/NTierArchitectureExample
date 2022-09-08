@@ -83,7 +83,7 @@ public class TodoListServiceTests : BaseServiceTestConfiguration
         var updateTodoListModel = Builder<UpdateTodoListModel>.CreateNew().Build();
         var todoListId = Guid.NewGuid();
         var todoList = Builder<TodoList>.CreateNew()
-            .With(tl => tl.CreatedBy = new Guid().ToString())
+            .With(tl => tl.CreatedBy = new Guid())
             .With(tl => tl.Id = todoListId)
             .Build();
 
@@ -106,7 +106,7 @@ public class TodoListServiceTests : BaseServiceTestConfiguration
         //Arrange
         var todoListId = Guid.NewGuid();
         var todoList = Builder<TodoList>.CreateNew()
-            .With(tl => tl.CreatedBy = new Guid().ToString())
+            .With(tl => tl.CreatedBy = new Guid())
             .With(tl => tl.Id = todoListId)
             .Build();
 

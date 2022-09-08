@@ -39,7 +39,7 @@ public class UsersEndpointTests : BaseOneTimeSetup
         apiResponse.StatusCode.Should().Be(HttpStatusCode.OK);
         var response = await ResponseHelper.GetApiResultAsync<CreateUserResponseModel>(apiResponse);
         CheckResponse.Succeeded(response);
-        context.Users.Should().Contain(u => u.Id == response.Result.Id.ToString());
+        context.Users.Should().Contain(u => u.Id == response.Result.Id);
     }
 
     [Test]

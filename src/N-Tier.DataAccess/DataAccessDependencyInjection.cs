@@ -41,14 +41,15 @@ public static class DataAccessDependencyInjection
             });
         else
             services.AddDbContext<DatabaseContext>(options =>
-                options.UseSqlServer(databaseConfig.ConnectionString,
+                options.UseNpgsql(databaseConfig.ConnectionString,
                     opt => opt.MigrationsAssembly(typeof(DatabaseContext).Assembly.FullName)));
     }
 
     private static void AddIdentity(this IServiceCollection services)
     {
-        services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-            .AddEntityFrameworkStores<DatabaseContext>();
+        services.AddIdentity<ApplicationUser, ApplicationRole>(/*options => options.SignIn.RequireConfirmedAccount = true*/)
+            .AddEntityFrameworkStores<DatabaseContext>()
+            .AddDefaultTokenProviders();
 
         services.Configure<IdentityOptions>(options =>
         {

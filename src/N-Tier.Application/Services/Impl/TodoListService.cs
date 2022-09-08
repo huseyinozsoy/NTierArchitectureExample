@@ -23,7 +23,7 @@ public class TodoListService : ITodoListService
 
     public async Task<IEnumerable<TodoListResponseModel>> GetAllAsync()
     {
-        var currentUserId = _claimService.GetUserId();
+        var currentUserId = Guid.Parse(_claimService.GetUserId());
 
         var todoLists = await _todoListRepository.GetAllAsync(tl => tl.CreatedBy == currentUserId);
 
@@ -46,7 +46,7 @@ public class TodoListService : ITodoListService
     {
         var todoList = await _todoListRepository.GetFirstAsync(tl => tl.Id == id);
 
-        var userId = _claimService.GetUserId();
+        var userId = Guid.Parse(_claimService.GetUserId());
 
         if (userId != todoList.CreatedBy)
             throw new BadRequestException("The selected list does not belong to you");

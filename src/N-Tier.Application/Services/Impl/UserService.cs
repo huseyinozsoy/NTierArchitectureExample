@@ -49,13 +49,13 @@ public class UserService : IUserService
         var emailTemplate = await _templateService.GetTemplateAsync(TemplateConstants.ConfirmationEmail);
 
         var emailBody = _templateService.ReplaceInTemplate(emailTemplate,
-            new Dictionary<string, string> { { "{UserId}", user.Id }, { "{Token}", token } });
+            new Dictionary<string, string> { { "{UserId}", user.Id.ToString() }, { "{Token}", token } });
 
         await _emailService.SendEmailAsync(EmailMessage.Create(user.Email, emailBody, "[N-Tier]Confirm your email"));
 
         return new CreateUserResponseModel
         {
-            Id = Guid.Parse((await _userManager.FindByNameAsync(user.UserName)).Id)
+            Id = (await _userManager.FindByNameAsync(user.UserName)).Id
         };
     }
 
@@ -83,7 +83,7 @@ public class UserService : IUserService
 
     public async Task<ConfirmEmailResponseModel> ConfirmEmailAsync(ConfirmEmailModel confirmEmailModel)
     {
-        var user = await _userManager.FindByIdAsync(confirmEmailModel.UserId);
+        var user = await _userManager.FindByIdAsync(confirmEmailModel.UserId.ToString());
 
         if (user == null)
             throw new UnprocessableRequestException("Your verification link is incorrect");
@@ -115,7 +115,7 @@ public class UserService : IUserService
 
         return new BaseResponseModel
         {
-            Id = Guid.Parse(user.Id)
+            Id = user.Id
         };
     }
 }
